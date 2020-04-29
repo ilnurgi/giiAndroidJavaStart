@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:padding="10sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="check" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="uncheck" />
+        <CheckBox
+            android:text="select"
+            android:id="@+id/check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/hello"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="123"
+            />
+    </LinearLayout>
+
+    <Button
+        android:text="state"
+        android:id="@+id/btn_state"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:text="starter"
+        android:id="@+id/btn_starter"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:text="browser"
+        android:id="@+id/btn_browser"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:text="metro"
+        android:id="@+id/btn_metro"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:text="metro2"
+        android:id="@+id/btn_metro2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:text="dialog"
+        android:id="@+id/btn_dialog"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+</LinearLayout>
