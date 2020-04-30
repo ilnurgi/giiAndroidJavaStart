@@ -11,9 +11,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Metro2Activity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Metro2Activity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private List<Metro> stations = new ArrayList<>();
+    private Metro2Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +32,27 @@ public class Metro2Activity extends AppCompatActivity implements AdapterView.OnI
         stations.add(new Metro("Рижская", "dob18", "dod28", 12f));
         stations.add(new Metro("Китай-город", "dob19", "dod29", 13f));
 
+        adapter = new Metro2Adapter(this, R.layout.metro_item, stations);
         ListView list = findViewById(R.id.list);
-        list.setAdapter(new Metro2Adapter(this, R.layout.metro_item, stations));
+        list.setAdapter(adapter);
         list.setOnItemClickListener(this);
+        list.setOnItemLongClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Metro m = stations.get(position);
         Toast.makeText(this, m.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+        toggleSelection(position);
+        return true;
+    }
+
+    private void toggleSelection(int position) {
+        adapter.toggleSelection(position);
+        invalidateOptionsMenu();
     }
 }
