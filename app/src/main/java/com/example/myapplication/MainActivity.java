@@ -18,6 +18,8 @@ import android.widget.CheckBox;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.myapplication.contacts.ContactsActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
     private CheckBox check;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btnStarter = findViewById(R.id.btn_starter);
         Button btnBrowser = findViewById(R.id.btn_browser);
         Button btnMetro = findViewById(R.id.btn_metro);
+        Button btnContacts = findViewById(R.id.btn_contacts);
 
         findViewById(R.id.btn_metro2).setOnClickListener(this);
         findViewById(R.id.btn_dialog).setOnClickListener(this);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStarter.setOnClickListener(this);
         btnBrowser.setOnClickListener(this);
         btnMetro.setOnClickListener(this);
+        btnContacts.setOnClickListener(this);
 //        button.setOnClickListener(view -> {});
 
         registerForContextMenu(findViewById(R.id.hello));
@@ -122,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_metro2:
                 Intent intent4 = new Intent(this, Metro2Activity.class);
                 startActivity(intent4);
+                break;
+            case R.id.btn_contacts:
+                Intent intent5 = new Intent(this, ContactsActivity.class);
+                startActivity(intent5);
                 break;
             case R.id.btn_dialog:
                 showDialog();
