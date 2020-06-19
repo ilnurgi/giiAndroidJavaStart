@@ -46,28 +46,32 @@
             android:text="123"
             />
     </LinearLayout>
-
-    <Button
-        android:text="state"
-        android:id="@+id/btn_state"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        />
-
-    <Button
-        android:text="starter"
-        android:id="@+id/btn_starter"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        />
+        android:orientation="horizontal"
+        >
+        <Button
+            android:text="state"
+            android:id="@+id/btn_state"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
 
-    <Button
-        android:text="browser"
-        android:id="@+id/btn_browser"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        />
+        <Button
+            android:text="starter"
+            android:id="@+id/btn_starter"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
 
+        <Button
+            android:text="browser"
+            android:id="@+id/btn_browser"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+    </LinearLayout>
     <Button
         android:text="metro"
         android:id="@+id/btn_metro"
@@ -92,6 +96,13 @@
     <Button
         android:text="contacts"
         android:id="@+id/btn_contacts"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:text="animals"
+        android:id="@+id/btn_animals"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         />

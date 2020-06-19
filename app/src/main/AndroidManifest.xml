@@ -6,12 +6,13 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".animals.AnimalsActivity" />
         <activity android:name=".contacts.ContactsActivity" />
         <activity android:name=".beautifulplaces.BeautifulActivity" />
         <activity android:name=".Metro2Activity" />
@@ -20,9 +21,9 @@
         <activity android:name=".StarterActivity" />
         <activity android:name=".StateActivity" />
         <activity
-        android:name=".DrawerActivity"
-        android:label="@string/title_activity_drawer"
-        android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NavigationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -32,6 +33,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

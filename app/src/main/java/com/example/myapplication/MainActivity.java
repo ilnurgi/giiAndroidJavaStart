@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.myapplication.animals.AnimalsActivity;
 import com.example.myapplication.contacts.ContactsActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btnBrowser = findViewById(R.id.btn_browser);
         Button btnMetro = findViewById(R.id.btn_metro);
         Button btnContacts = findViewById(R.id.btn_contacts);
+        Button btnAnimals = findViewById(R.id.btn_animals);
 
         findViewById(R.id.btn_metro2).setOnClickListener(this);
         findViewById(R.id.btn_dialog).setOnClickListener(this);
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnBrowser.setOnClickListener(this);
         btnMetro.setOnClickListener(this);
         btnContacts.setOnClickListener(this);
+        btnAnimals.setOnClickListener(this);
 //        button.setOnClickListener(view -> {});
 
         registerForContextMenu(findViewById(R.id.hello));
@@ -130,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_contacts:
                 Intent intent5 = new Intent(this, ContactsActivity.class);
                 startActivity(intent5);
+                break;
+            case R.id.btn_animals:
+                Intent intent6 = new Intent(this, AnimalsActivity.class);
+                startActivity(intent6);
                 break;
             case R.id.btn_dialog:
                 showDialog();
