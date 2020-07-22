@@ -5,7 +5,8 @@
         android:id="@+id/animals_main_search"
         android:title="Search"
         android:icon="@drawable/ic_baseline_search_24"
-        app:showAsAction="always"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"
         />
     <item
         android:id="@+id/animals_main_up"

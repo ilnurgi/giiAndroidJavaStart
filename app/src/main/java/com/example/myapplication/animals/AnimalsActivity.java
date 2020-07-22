@@ -3,13 +3,21 @@ package com.example.myapplication.animals;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import com.example.myapplication.R;
@@ -70,6 +78,7 @@ public class AnimalsActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.animals_main_search:
+                handlerSearch(item);
                 return true;
             case R.id.animals_main_up:
                 orderBy = AnimalsTable.COLUMN_ANIMAL + " asc ";
@@ -85,9 +94,111 @@ public class AnimalsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private String likeQuery = "";
+
+    private void handlerSearch(MenuItem item) {
+        SearchView searchView = (SearchView) item.getActionView();
+        item.expandActionView();
+        searchView.setQuery(likeQuery, false);
+
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        if(!TextUtils.isEmpty(newText)){
+                            selection = AnimalsTable.COLUMN_ANIMAL + " like ? ";
+                            selectionArgs = new String[]{
+                                    "%" + newText + "%"
+                            };
+                        } else {
+                            selection = null;
+                            selectionArgs = null;
+                        }
+                        likeQuery = newText;
+                        updateCursor();
+                        return true;
+                    }
+                }
+        );
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getMenuInflater().inflate(R.menu.animals_context, menu);
         super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()){
+            case R.id.animals_context_delete:
+                deleteAnimal(info.position);
+                return true;
+            case R.id.animals_context_update:
+                updateAnimalDialog(info.position);
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void updateAnimalDialog(int position) {
+        Cursor cursor = adapter.getCursor();
+        cursor.moveToPosition(position);
+        String databaseId = cursor.getString(
+                cursor.getColumnIndex(AnimalsTable.COLUMN_ID)
+        );
+        String databaseName = cursor.getString(
+                cursor.getColumnIndex(AnimalsTable.COLUMN_ANIMAL)
+        );
+        EditText edit = (EditText) LayoutInflater
+                .from(this)
+                .inflate(R.layout.animals_dialog, null);
+        edit.setText(databaseName);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Update Animal");
+        builder.setView(edit);
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newName = edit.getText().toString();
+                if (newName.equals(databaseName)) {
+                    return;
+                }
+
+                ContentValues values = new ContentValues();
+                values.put(AnimalsTable.COLUMN_ANIMAL, newName);
+
+                helper.getWritableDatabase().update(
+                        AnimalsTable.TABLE_ANIMALS,
+                        values,
+                        AnimalsTable.COLUMN_ID + " = ? ",
+                        new String[] {databaseId }
+                );
+                updateCursor();
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private void deleteAnimal(int position) {
+        Cursor cursor = adapter.getCursor();
+        cursor.moveToPosition(position);
+        String databaseId = cursor.getString(
+                cursor.getColumnIndex(AnimalsTable.COLUMN_ID)
+        );
+        helper.getWritableDatabase().delete(
+                AnimalsTable.TABLE_ANIMALS,
+                AnimalsTable.COLUMN_ID + " = ?",
+                new String[]{ databaseId }
+        );
+        updateCursor();
     }
 }
